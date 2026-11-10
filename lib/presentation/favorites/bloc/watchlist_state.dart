@@ -1,0 +1,25 @@
+part of '../favorites.dart';
+
+sealed class WatchlistState extends Equatable {
+  const WatchlistState();
+  @override
+  List<Object> get props => [];
+}
+
+final class WatchlistInitial extends WatchlistState {}
+
+final class WatchlistLoading extends WatchlistState {}
+
+final class WatchlistLoaded extends WatchlistState {
+  final List<MediaItem> items;
+  const WatchlistLoaded(this.items);
+  @override
+  List<Object> get props => [items];
+}
+
+final class WatchlistError extends WatchlistState {
+  final String message;
+  const WatchlistError(this.message);
+  @override
+  List<Object> get props => [message];
+}
