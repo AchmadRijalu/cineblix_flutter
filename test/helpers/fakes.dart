@@ -1,6 +1,6 @@
-import 'package:cineblix_flutter/common/commons.dart';
 import 'package:cineblix_flutter/domain/entities/entities.dart';
 import 'package:cineblix_flutter/domain/repositories/repositories.dart';
+import 'package:core/core.dart';
 import 'package:fpdart/fpdart.dart';
 
 const dark = TvDetail(

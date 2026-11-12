@@ -14,7 +14,14 @@ class HomeView extends StatelessWidget {
             icon: const Icon(Icons.search),
             onPressed: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (_) => const SearchPage()),
+              MaterialPageRoute(
+                builder: (_) => SearchPage(
+                  onItemTap: (context, id) => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => TvDetailView(id: id)),
+                  ),
+                ),
+              ),
             ),
           ),
           IconButton(
@@ -23,6 +30,14 @@ class HomeView extends StatelessWidget {
             onPressed: () => Navigator.push(
               context,
               MaterialPageRoute(builder: (_) => const WatchlistPage()),
+            ),
+          ),
+          IconButton(
+            tooltip: 'About',
+            icon: const Icon(Icons.info),
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const AboutPage()),
             ),
           ),
         ],

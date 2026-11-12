@@ -1,6 +1,6 @@
-import 'package:cineblix_flutter/common/commons.dart';
 import 'package:cineblix_flutter/domain/use_cases/use_cases.dart';
 import 'package:cineblix_flutter/presentation/favorites/favorites.dart';
+import 'package:core/core.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'helpers/fakes.dart';

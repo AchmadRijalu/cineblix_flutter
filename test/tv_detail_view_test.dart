@@ -2,7 +2,7 @@ import 'package:cineblix_flutter/domain/entities/entities.dart';
 import 'package:cineblix_flutter/domain/use_cases/use_cases.dart';
 import 'package:cineblix_flutter/injection.dart';
 import 'package:cineblix_flutter/presentation/tv_detail/tv_detail.dart';
-import 'package:cineblix_flutter/presentation/widgets/widgets.dart';
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';

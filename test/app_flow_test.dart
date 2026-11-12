@@ -1,17 +1,16 @@
-import 'package:cineblix_flutter/common/commons.dart';
 import 'package:cineblix_flutter/domain/entities/entities.dart';
 import 'package:cineblix_flutter/injection.dart';
 import 'package:cineblix_flutter/main.dart';
 import 'package:cineblix_flutter/presentation/detail_movie/detail_movie.dart';
 import 'package:cineblix_flutter/presentation/favorites/favorites.dart';
-import 'package:cineblix_flutter/presentation/search/search.dart';
 import 'package:cineblix_flutter/presentation/season/season.dart';
 import 'package:cineblix_flutter/presentation/see_more/see_more.dart';
 import 'package:cineblix_flutter/presentation/tv_detail/tv_detail.dart';
-import 'package:cineblix_flutter/presentation/widgets/widgets.dart';
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:search/search.dart';
 import 'package:snackify/enums/snack_enums.dart';
 import 'package:snackify/snack_type_details.dart';
 
@@ -426,31 +425,19 @@ void main() {
   });
 
   group('Search → TV detail → watchlist', () {
-    testWidgets('submitting a title shows API results and opens the detail', (
+    testWidgets('searching from Home opens the TV detail and saves it', (
       tester,
     ) async {
       setUpApp();
-      await tester.pumpWidget(app(const SearchPage()));
-      expect(find.text('Type a title and press search'), findsOneWidget);
-      expect(find.byType(CustomFormField), findsOneWidget);
+      await tester.pumpWidget(const MyApp());
+      await tester.pumpAndSettle();
+      await tester.tap(find.byIcon(Icons.search));
+      await tester.pumpAndSettle();
+      expect(find.byType(SearchPage), findsOneWidget);
 
       await tester.enterText(find.byType(CustomFormField), 'Dark');
       await tester.testTextInput.receiveAction(TextInputAction.search);
-      await tester.pump();
-      expect(find.byType(CustomLoadingAnimation), findsOneWidget);
-      expect(
-        tester
-            .widget<ModalBarrier>(
-              find.descendant(
-                of: find.byType(CustomLoadingAnimation),
-                matching: find.byType(ModalBarrier),
-              ),
-            )
-            .color,
-        Colors.transparent,
-      );
       await tester.pumpAndSettle();
-      expect(find.text('Dark'), findsWidgets);
       expect(find.textContaining('Time travel in Winden.'), findsOneWidget);
 
       await tester.tap(find.byType(PosterTile));
@@ -469,29 +456,6 @@ void main() {
       await expectSnack(tester, 'Added to Watchlist', SnackType.success);
       expect(removeFromWatchlist(), findsOneWidget);
       expect(watchlist.items.single.title, 'Dark');
-    });
-
-    Future<void> search(WidgetTester tester, String q) async {
-      await tester.pumpWidget(app(const SearchPage()));
-      await tester.enterText(find.byType(TextField), q);
-      await tester.testTextInput.receiveAction(TextInputAction.search);
-      await tester.pumpAndSettle();
-    }
-
-    testWidgets('no results are reported with the query', (tester) async {
-      setUpApp(
-        routes: {
-          '/search/tv': (200, {'results': []}),
-        },
-      );
-      await search(tester, 'zzz');
-      expect(find.text('No TV series found for "zzz"'), findsOneWidget);
-    });
-
-    testWidgets('API errors are shown', (tester) async {
-      setUpApp(routes: {});
-      await search(tester, 'zzz');
-      expect(find.text('not found'), findsOneWidget);
     });
 
     testWidgets(

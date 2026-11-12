@@ -1,10 +1,10 @@
-import 'package:cineblix_flutter/common/commons.dart';
 import 'package:cineblix_flutter/data/data_sources/data_sources.dart';
 import 'package:cineblix_flutter/data/model/models.dart';
 import 'package:cineblix_flutter/data/repositories/repositories.dart';
 import 'package:cineblix_flutter/domain/entities/entities.dart';
 import 'package:cineblix_flutter/domain/use_cases/use_cases.dart';
 import 'package:cineblix_flutter/presentation/season/season.dart';
+import 'package:core/core.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';

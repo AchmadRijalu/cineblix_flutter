@@ -1,6 +1,6 @@
+import 'package:core/core.dart';
 import 'package:fpdart/fpdart.dart';
 
-import '../../common/commons.dart';
 import '../entities/entities.dart';
 import '../repositories/repositories.dart';
 
@@ -12,7 +12,6 @@ part 'home/get_popular_movies.dart';
 part 'home/get_popular_tv.dart';
 part 'home/get_top_rated_movies.dart';
 part 'home/get_top_rated_tv.dart';
-part 'search/search_tv.dart';
 part 'season/get_season_detail.dart';
 part 'see_more/get_see_more_items.dart';
 part 'tv_detail/get_tv_detail.dart';

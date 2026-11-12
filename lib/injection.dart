@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:search/search.dart';
 import 'data/data_sources/data_sources.dart';
 import 'data/repositories/repositories.dart';
 import 'domain/entities/entities.dart';
@@ -7,7 +8,6 @@ import 'domain/use_cases/use_cases.dart';
 import 'presentation/detail_movie/detail_movie.dart';
 import 'presentation/favorites/favorites.dart';
 import 'presentation/home/home.dart';
-import 'presentation/search/search.dart';
 import 'presentation/season/season.dart';
 import 'presentation/see_more/see_more.dart';
 import 'presentation/tv_detail/tv_detail.dart';
@@ -21,7 +21,7 @@ void init() {
   _initSeeMore();
   _initTvDetail();
   _initSeason();
-  _initSearch();
+  initSearch(locator);
   _initWatchlist();
 }
 
@@ -97,16 +97,6 @@ void _initSeason() {
     )
     ..registerLazySingleton(() => GetSeasonDetail(locator()))
     ..registerFactory(() => SeasonBloc(locator()));
-}
-
-void _initSearch() {
-  locator
-    ..registerLazySingleton(() => SearchRemoteDataSource(locator()))
-    ..registerLazySingleton<SearchRepository>(
-      () => SearchRepositoryImpl(locator()),
-    )
-    ..registerLazySingleton(() => SearchTv(locator()))
-    ..registerFactory(() => SearchBloc(locator()));
 }
 
 void _initWatchlist() {

@@ -1,0 +1,4 @@
+library;
+
+export 'injection.dart';
+export 'presentation/presentation.dart' show SearchPage;

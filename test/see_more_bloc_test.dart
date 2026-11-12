@@ -1,8 +1,8 @@
-import 'package:cineblix_flutter/common/commons.dart';
 import 'package:cineblix_flutter/domain/entities/entities.dart';
 import 'package:cineblix_flutter/domain/repositories/repositories.dart';
 import 'package:cineblix_flutter/domain/use_cases/use_cases.dart';
 import 'package:cineblix_flutter/presentation/see_more/see_more.dart';
+import 'package:core/core.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
 

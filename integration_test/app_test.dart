@@ -2,13 +2,13 @@ import 'package:cineblix_flutter/injection.dart';
 import 'package:cineblix_flutter/main.dart';
 import 'package:cineblix_flutter/presentation/detail_movie/detail_movie.dart';
 import 'package:cineblix_flutter/presentation/favorites/favorites.dart';
-import 'package:cineblix_flutter/presentation/search/search.dart';
 import 'package:cineblix_flutter/presentation/season/season.dart';
 import 'package:cineblix_flutter/presentation/tv_detail/tv_detail.dart';
-import 'package:cineblix_flutter/presentation/widgets/widgets.dart';
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
+import 'package:search/search.dart';
 
 import '../test/helpers/app_setup.dart';
 
