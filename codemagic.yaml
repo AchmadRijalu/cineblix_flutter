@@ -1,0 +1,39 @@
+workflows:
+  android-ci:
+    name: Android CI
+    instance_type: mac_mini_m2
+    max_build_duration: 60
+    environment:
+      flutter: 3.41.9
+      java: 17
+      groups:
+        - tmdb # Codemagic UI > Environment variables: TMDB_API_KEY (secure)
+    triggering:
+      events:
+        - push
+        - pull_request
+      branch_patterns:
+        # push to main, or PR targeting main
+        - pattern: main
+          include: true
+          source: false
+      cancel_previous_builds: true
+    scripts:
+      - name: Get packages
+        script: |
+          set -e
+          flutter pub get
+          for m in modules/*/; do (cd "$m" && flutter pub get); done
+      - name: Analyze
+        script: flutter analyze
+      - name: Test
+        script: |
+          set -e
+          flutter test
+          for m in modules/*/; do
+            if [ -d "$m/test" ]; then (cd "$m" && flutter test); fi
+          done
+      - name: Build APK
+        script: flutter build apk --release --dart-define=TMDB_API_KEY=$TMDB_API_KEY
+    artifacts:
+      - build/app/outputs/flutter-apk/*.apk
