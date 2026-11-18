@@ -1,10 +1,13 @@
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:home/home.dart';
 
 import 'injection.dart';
-import 'presentation/home/home.dart';
+import 'navigation.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  locator.registerSingleton(await pinnedSecurityContext());
   init();
   runApp(const MyApp());
 }
@@ -19,14 +22,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: MultiBlocProvider(
-        providers: [
-          BlocProvider(create: (_) => locator<HomeBloc>()..add(HomeFetched())),
-          BlocProvider(
-            create: (_) => locator<HomeTvBloc>()..add(HomeTvFetched()),
-          ),
-        ],
-        child: const HomeView(),
+      home: const HomePage(
+        onMovieTap: openMovie,
+        onTvTap: openTv,
+        onSeeMore: openSeeMore,
+        onSearch: openSearch,
+        onWatchlist: openWatchlist,
+        onAbout: openAbout,
       ),
     );
   }

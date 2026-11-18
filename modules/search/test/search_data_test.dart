@@ -5,7 +5,7 @@ import 'package:fpdart/fpdart.dart';
 import 'package:search/data/data.dart';
 import 'package:search/domain/domain.dart';
 
-import 'helpers/fake_dio.dart';
+import 'package:test_support/test_support.dart';
 
 const dark = SearchResult(
   id: 1,

@@ -1,0 +1,17 @@
+include: package:flutter_lints/flutter.yaml
+linter:
+  rules:
+    - prefer_const_constructors
+    - prefer_const_declarations
+    - prefer_final_locals
+    - prefer_single_quotes
+    - directives_ordering
+    - always_declare_return_types
+    - annotate_overrides
+    - unnecessary_lambdas
+    - prefer_relative_imports
+    - sort_child_properties_last
+    - use_super_parameters
+    - avoid_redundant_argument_values
+    - unnecessary_await_in_return
+    - prefer_const_literals_to_create_immutables

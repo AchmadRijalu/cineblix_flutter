@@ -5,7 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:search/search.dart';
 
-import 'helpers/fake_dio.dart';
+import 'package:test_support/test_support.dart';
 
 const results = {
   'results': [

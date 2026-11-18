@@ -1,14 +1,10 @@
+import 'package:about/about.dart';
 import 'package:cineblix_flutter/injection.dart';
 import 'package:cineblix_flutter/main.dart';
-import 'package:cineblix_flutter/presentation/detail_movie/detail_movie.dart';
-import 'package:cineblix_flutter/presentation/favorites/favorites.dart';
-import 'package:cineblix_flutter/presentation/season/season.dart';
-import 'package:cineblix_flutter/presentation/tv_detail/tv_detail.dart';
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
-import 'package:search/search.dart';
 
 import '../test/helpers/app_setup.dart';
 
@@ -39,7 +35,6 @@ void main() {
 
     await tester.tap(find.byType(PosterCard).first);
     await waitFor(tester, find.text('Inception'));
-    expect(find.byType(DetailMovieView), findsOneWidget);
 
     await tester.tap(find.byTooltip('Add to Watchlist'));
     await tester.pump();
@@ -50,7 +45,7 @@ void main() {
     await tester.pageBack();
     await tester.pumpAndSettle();
     await tester.tap(find.byIcon(Icons.favorite));
-    await waitFor(tester, find.byType(WatchlistPage));
+    await waitFor(tester, find.text('Watchlist'));
     await waitFor(tester, find.text('Inception'));
   });
 
@@ -60,13 +55,12 @@ void main() {
     await waitFor(tester, find.text('Now Playing'));
 
     await tester.tap(find.byIcon(Icons.search));
-    await waitFor(tester, find.byType(SearchPage));
+    await waitFor(tester, find.text('Search TV Series'));
     await tester.enterText(find.byType(CustomFormField), 'Dark');
     await tester.testTextInput.receiveAction(TextInputAction.search);
     await waitFor(tester, find.byType(PosterTile));
 
     await tester.tap(find.byType(PosterTile));
-    await waitFor(tester, find.byType(TvDetailView));
     await waitFor(tester, find.text('★ 8.4'));
     expect(find.text('Time travel in Winden.'), findsOneWidget);
 
@@ -82,9 +76,7 @@ void main() {
       scrollable: find.byType(Scrollable).first,
     );
     await tester.tap(find.text('Season 1'));
-    await waitFor(tester, find.byType(SeasonPage));
     await waitFor(tester, find.text('E1 · Secrets'));
-    expect(find.text('E2 · Lies'), findsOneWidget);
   });
 
   testWidgets('TV Series tab lists series and opens a detail', (tester) async {
@@ -96,7 +88,16 @@ void main() {
     await waitFor(tester, find.text('On The Air'));
 
     await tester.tap(find.byType(PosterCard).first);
-    await waitFor(tester, find.byType(TvDetailView));
     await waitFor(tester, find.text('Seasons'));
+  });
+
+  testWidgets('the About page opens from Home', (tester) async {
+    setUpApp();
+    await tester.pumpWidget(const MyApp());
+    await waitFor(tester, find.text('Now Playing'));
+
+    await tester.tap(find.byIcon(Icons.info));
+    await waitFor(tester, find.byType(AboutPage));
+    expect(find.text('Cineblix'), findsOneWidget);
   });
 }

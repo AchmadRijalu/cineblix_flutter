@@ -21,6 +21,34 @@ void main() {
       expect(pressed, 1);
     });
 
+    testWidgets('holding the button plays the press animation', (tester) async {
+      await tester.pumpWidget(
+        host(CustomFilledButton(title: 'Go', onPressed: () {})),
+      );
+      double scale() => tester
+          .widget<Transform>(
+            find
+                .descendant(
+                  of: find.byType(CustomFilledButton),
+                  matching: find.byType(Transform),
+                )
+                .first,
+          )
+          .transform
+          .entry(0, 0);
+
+      expect(scale(), 1.0);
+      final gesture = await tester.startGesture(
+        tester.getCenter(find.text('Go')),
+      );
+      await tester.pump(const Duration(milliseconds: 150));
+      await tester.pump(const Duration(milliseconds: 60));
+      expect(scale(), isNot(1.0));
+      await gesture.up();
+      await tester.pumpAndSettle();
+      expect(scale(), closeTo(1.0, 0.001));
+    });
+
     testWidgets('does nothing while disabled', (tester) async {
       var pressed = 0;
       await tester.pumpWidget(
@@ -108,6 +136,16 @@ void main() {
         CustomErrorItem.friendlyMessage(context, 'Bad request'),
         'Something went wrong',
       );
+    });
+
+    testWidgets('shows a retry button that calls onRetry', (tester) async {
+      var retries = 0;
+      await tester.pumpWidget(
+        host(CustomErrorItem(message: 'Boom', onRetry: () => retries++)),
+      );
+      expect(find.text('Boom'), findsOneWidget);
+      await tester.tap(find.text('Retry'));
+      expect(retries, 1);
     });
 
     testWidgets('shows default title and message without retry', (
@@ -267,6 +305,14 @@ void main() {
       await tester.pump(const Duration(seconds: 4));
       await tester.pumpAndSettle();
     });
+  });
+
+  testWidgets('PosterCard falls back to the icon when the image fails', (
+    tester,
+  ) async {
+    await tester.pumpWidget(host(const PosterCard(posterPath: '/broken.jpg')));
+    await tester.pumpAndSettle();
+    expect(find.byIcon(Icons.movie), findsOneWidget);
   });
 
   testWidgets('PosterCard without onTap still renders the placeholder', (
