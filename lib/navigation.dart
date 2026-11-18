@@ -8,8 +8,13 @@ import 'package:see_more/see_more.dart';
 import 'package:tv_detail/tv_detail.dart';
 import 'package:watchlist/watchlist.dart';
 
-Future<void> _push(BuildContext context, Widget page) =>
-    Navigator.push<void>(context, MaterialPageRoute(builder: (_) => page));
+Future<void> _push(BuildContext context, Widget page) => Navigator.push<void>(
+  context,
+  MaterialPageRoute(
+    builder: (_) => page,
+    settings: RouteSettings(name: page.runtimeType.toString()),
+  ),
+);
 
 Future<void> openMovie(BuildContext context, int id) =>
     _push(context, DetailMovieView(id: id, onRecommendationTap: openMovie));

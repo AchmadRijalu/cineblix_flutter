@@ -1,7 +1,5 @@
 part of 'commons.dart';
 
-/// Trusts only Amazon Root CA 1, the root of api.themoviedb.org's chain.
-/// Pinning the root (not the leaf) survives TMDB's ~6-monthly leaf rotation.
 Future<SecurityContext> pinnedSecurityContext() async {
   final cert = await rootBundle.load(
     'packages/core/certificates/amazon_root_ca_1.pem',
