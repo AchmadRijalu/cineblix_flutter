@@ -7,13 +7,12 @@ workflows:
       flutter: 3.41.9
       java: 17
       groups:
-        - tmdb # Codemagic UI > Environment variables: TMDB_API_KEY (secure)
+        - tmdb 
     triggering:
       events:
         - push
         - pull_request
       branch_patterns:
-        # push to main, or PR targeting main
         - pattern: main
           include: true
           source: false
