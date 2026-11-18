@@ -1,9 +1,0 @@
-part of '../use_cases.dart';
-
-class GetNowPlayingMovies {
-  final HomeRepository repository;
-  GetNowPlayingMovies(this.repository);
-
-  Future<Either<Failure, List<Movie>>> call() =>
-      repository.getNowPlayingMovies();
-}
