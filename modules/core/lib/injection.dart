@@ -8,5 +8,6 @@ import 'utils/commons.dart';
 void initCore(GetIt locator) {
   locator.registerLazySingleton<Dio>(
     () => createDio(locator<SecurityContext>()),
+    
   );
 }
