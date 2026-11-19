@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "539941000049",
+    "project_id": "cineblix-flutter-d69c7",
+    "storage_bucket": "cineblix-flutter-d69c7.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:539941000049:android:6f98a23e02cc1789735cd0",
+        "android_client_info": {
+          "package_name": "com.example.cineblix_flutter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3RTCQ8rvqIBVlCvwXmw76HnrWoh0Ob2Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

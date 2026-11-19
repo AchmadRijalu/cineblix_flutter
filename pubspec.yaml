@@ -12,20 +12,29 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.8
-  fpdart: ^1.2.0
-  equatable: ^3.0.0
-  dio: ^5.11.1
-  bloc: ^9.2.1
   get_it: ^9.3.0
-  flutter_bloc: ^9.1.1
-  sqflite: ^2.4.2+1
 
   about:
-    path: about
+    path: modules/about
   core:
-    path: core
+    path: modules/core
+  detail_movie:
+    path: modules/detail_movie
+  home:
+    path: modules/home
   search:
-    path: search
+    path: modules/search
+  season:
+    path: modules/season
+  see_more:
+    path: modules/see_more
+  tv_detail:
+    path: modules/tv_detail
+  watchlist:
+    path: modules/watchlist
+  firebase_core: ^5.1.0
+  firebase_crashlytics: ^6.0.1
+  firebase_analytics: ^13.0.1
 
 dev_dependencies:
   flutter_test:
@@ -34,15 +43,10 @@ dev_dependencies:
     sdk: flutter
 
   flutter_lints: ^6.0.0
-  sqflite_common_ffi: ^2.4.0+3
-  snackify: ^1.2.4
   google_fonts: ^8.2.1
+  test_support:
+    path: modules/test_support
 
 flutter:
 
   uses-material-design: true
-
-hooks:
-  user_defines:
-    sqlite3:
-      source: system

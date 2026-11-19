@@ -1,10 +1,9 @@
-import 'package:cineblix_flutter/domain/repositories/repositories.dart';
 import 'package:cineblix_flutter/injection.dart';
-import 'package:dio/dio.dart';
+import 'package:test_support/test_support.dart';
+import 'package:watchlist/testing.dart';
+import 'package:watchlist/watchlist.dart';
 
-import 'fake_dio.dart';
-import 'fakes.dart';
-import 'tmdb_fixtures.dart';
+import 'fixtures.dart';
 
 late FakeWatchlistRepository watchlist;
 
@@ -16,6 +15,6 @@ void setUpApp({
   locator.allowReassignment = true;
   init();
   locator
-    ..registerLazySingleton<Dio>(() => fakeDio(routes ?? allRoutes))
-    ..registerLazySingleton<WatchlistRepository>(() => watchlist);
+    ..registerSingleton(fakeDio(routes ?? allRoutes))
+    ..registerSingleton<WatchlistRepository>(watchlist);
 }
